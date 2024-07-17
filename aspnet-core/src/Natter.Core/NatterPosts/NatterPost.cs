@@ -7,11 +7,12 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Natter.NatterInteractions;
 
 namespace Natter.Posts
 {
     [Table("NatterPosts")]
-	public class Post: Entity, IHasCreationTime
+	public class NatterPost: Entity, IHasCreationTime
 	{
 
         public DateTime CreationTime { get; set; }
@@ -25,7 +26,10 @@ namespace Natter.Posts
         public NatterUser NatterUser { get; set; }
         public int NatterUserId { get; set; }
 
-        // TODO: add post interactions foreign key link
+        [ForeignKey(nameof(NatterInteractionId))]
 
+        public NatterInteraction NatterInteraction {  get; set; }
+
+        public int NatterInteractionId {  get; set; }
     }
 }
