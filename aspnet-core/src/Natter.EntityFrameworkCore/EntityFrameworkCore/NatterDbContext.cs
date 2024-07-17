@@ -8,6 +8,7 @@ using Natter.Posts;
 using Natter.NatterPostInteractions;
 using Natter.NatterInteractions;
 using Natter.NatterMessages;
+using Natter.NatterUserMessages;
 namespace Natter.EntityFrameworkCore
 {
     public class NatterDbContext : AbpZeroDbContext<Tenant, Role, User, NatterDbContext>
@@ -23,7 +24,7 @@ namespace Natter.EntityFrameworkCore
 
         public DbSet<NatterMessage> NatterMessages { get; set; }
 
-        // public DbSet<NatterUserMessage> NatterUserMessages { get; set; }
+        public DbSet<NatterUserMessage> NatterUserMessages { get; set; }
        
         public NatterDbContext(DbContextOptions<NatterDbContext> options)
             : base(options)
