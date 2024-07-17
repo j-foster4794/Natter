@@ -8,6 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc.TagHelpers;
 
 namespace Natter.NatterMessages
 {
@@ -17,7 +18,7 @@ namespace Natter.NatterMessages
 
         public DateTime CreationTime { get; set; }
 
-
-        
+        public string Content { get; set; }
+       
     }
 }
