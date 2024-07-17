@@ -14,6 +14,7 @@ using Natter.EntityFrameworkCore;
 using Natter.EntityFrameworkCore.Seed.Host;
 using Natter.EntityFrameworkCore.Seed.Tenants;
 using Natter.MultiTenancy;
+using Natter.Tests.TestData;
 
 namespace Natter.Tests
 {
@@ -44,6 +45,9 @@ namespace Natter.Tests
                 NormalizeDbContext(context);
                 new TenantRoleAndUserBuilder(context, 1).Create();
             });
+
+            // Add test data ready to be run against tests
+            UsingDbContext(context => new TestDataBuilder(context).Build());
 
             LoginAsDefaultTenantAdmin();
         }
