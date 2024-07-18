@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Natter.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Natter.EntityFrameworkCore;
 namespace Natter.Migrations
 {
     [DbContext(typeof(NatterDbContext))]
-    partial class NatterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240718095005_AddRemainingTables")]
+    partial class AddRemainingTables
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1798,10 +1801,15 @@ namespace Natter.Migrations
                     b.Property<string>("Images")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("NatterInteractionId")
+                        .HasColumnType("int");
+
                     b.Property<int>("NatterUserId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("NatterInteractionId");
 
                     b.HasIndex("NatterUserId");
 
@@ -2112,11 +2120,19 @@ namespace Natter.Migrations
 
             modelBuilder.Entity("Natter.Posts.NatterPost", b =>
                 {
+                    b.HasOne("Natter.NatterInteractions.NatterInteraction", "NatterInteraction")
+                        .WithMany()
+                        .HasForeignKey("NatterInteractionId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
                     b.HasOne("Natter.NatterUsers.NatterUser", "NatterUser")
                         .WithMany()
                         .HasForeignKey("NatterUserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("NatterInteraction");
 
                     b.Navigation("NatterUser");
                 });

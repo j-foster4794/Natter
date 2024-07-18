@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Natter.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Natter.EntityFrameworkCore;
 namespace Natter.Migrations
 {
     [DbContext(typeof(NatterDbContext))]
-    partial class NatterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240717124639_AddingNatterPosts")]
+    partial class AddingNatterPosts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1647,106 +1650,6 @@ namespace Natter.Migrations
                     b.ToTable("AbpTenants");
                 });
 
-            modelBuilder.Entity("Natter.NatterInteractions.NatterInteraction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NatterUserId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Type")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NatterUserId");
-
-                    b.ToTable("NatterInteractions");
-                });
-
-            modelBuilder.Entity("Natter.NatterMessages.NatterMessage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Content")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("NatterMessages");
-                });
-
-            modelBuilder.Entity("Natter.NatterPostInteractions.NatterPostInteraction", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NatterInteractionId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("NatterPostId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NatterInteractionId");
-
-                    b.HasIndex("NatterPostId");
-
-                    b.ToTable("NatterPostsInteractions");
-                });
-
-            modelBuilder.Entity("Natter.NatterUserMessages.NatterUserMessage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("CreationTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("NatterMessageId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SentFromUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("SentToUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NatterMessageId");
-
-                    b.HasIndex("SentFromUserId");
-
-                    b.HasIndex("SentToUserId");
-
-                    b.ToTable("NatterUserMessages");
-                });
-
             modelBuilder.Entity("Natter.NatterUsers.NatterUser", b =>
                 {
                     b.Property<int>("Id")
@@ -2051,63 +1954,6 @@ namespace Natter.Migrations
                     b.Navigation("Edition");
 
                     b.Navigation("LastModifierUser");
-                });
-
-            modelBuilder.Entity("Natter.NatterInteractions.NatterInteraction", b =>
-                {
-                    b.HasOne("Natter.NatterUsers.NatterUser", "NatterUser")
-                        .WithMany()
-                        .HasForeignKey("NatterUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("NatterUser");
-                });
-
-            modelBuilder.Entity("Natter.NatterPostInteractions.NatterPostInteraction", b =>
-                {
-                    b.HasOne("Natter.NatterInteractions.NatterInteraction", "NatterInteraction")
-                        .WithMany()
-                        .HasForeignKey("NatterInteractionId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Natter.Posts.NatterPost", "NatterPost")
-                        .WithMany()
-                        .HasForeignKey("NatterPostId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("NatterInteraction");
-
-                    b.Navigation("NatterPost");
-                });
-
-            modelBuilder.Entity("Natter.NatterUserMessages.NatterUserMessage", b =>
-                {
-                    b.HasOne("Natter.NatterMessages.NatterMessage", "NatterMessage")
-                        .WithMany()
-                        .HasForeignKey("NatterMessageId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Natter.NatterUsers.NatterUser", "SentFromUser")
-                        .WithMany()
-                        .HasForeignKey("SentFromUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.HasOne("Natter.NatterUsers.NatterUser", "SentToUser")
-                        .WithMany()
-                        .HasForeignKey("SentToUserId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("NatterMessage");
-
-                    b.Navigation("SentFromUser");
-
-                    b.Navigation("SentToUser");
                 });
 
             modelBuilder.Entity("Natter.Posts.NatterPost", b =>
