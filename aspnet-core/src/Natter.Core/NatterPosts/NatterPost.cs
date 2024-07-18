@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Natter.NatterInteractions;
+using Microsoft.EntityFrameworkCore;
 
 namespace Natter.Posts
 {
@@ -23,11 +24,12 @@ namespace Natter.Posts
 
 
         [ForeignKey(nameof(NatterUserId))]
+
         public NatterUser NatterUser { get; set; }
         public int NatterUserId { get; set; }
 
         [ForeignKey(nameof(NatterInteractionId))]
-
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         public NatterInteraction NatterInteraction {  get; set; }
 
         public int NatterInteractionId {  get; set; }

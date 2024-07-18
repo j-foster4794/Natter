@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Natter.NatterUsers;
+using Microsoft.EntityFrameworkCore;
 
 namespace Natter.NatterInteractions
 {
@@ -18,8 +19,10 @@ namespace Natter.NatterInteractions
         public string Type { get; set; }
 
         [ForeignKey(nameof(NatterUserId))]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
         public NatterUser NatterUser { get; set; }
         public int NatterUserId { get; set; }
+
 
     }
 }

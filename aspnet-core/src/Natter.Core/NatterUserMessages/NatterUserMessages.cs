@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Natter.NatterUsers;
 using Natter.NatterMessages;
+using Microsoft.EntityFrameworkCore;
 
 namespace Natter.NatterUserMessages
 {
@@ -18,15 +19,23 @@ namespace Natter.NatterUserMessages
         public DateTime CreationTime { get; set; }
 
         [ForeignKey(nameof(SentFromUserId))]
+        [DeleteBehavior(DeleteBehavior.Restrict)]
 
-        public NatterUser SentFromUserIds { get; set; }
+        public NatterUser SentFromUser { get; set; }
         public int SentFromUserId { get; set; }
 
         [ForeignKey(nameof(NatterMessageId))]
 
+
         public NatterMessage NatterMessage { get; set; }
 
         public int NatterMessageId { get; set; }
+
+        [ForeignKey(nameof(SentToUserId))]
+
+        [DeleteBehavior(DeleteBehavior.Restrict)]
+        public NatterUser SentToUser { get; set; }
+
         public int SentToUserId { get; set; } 
 
     }
