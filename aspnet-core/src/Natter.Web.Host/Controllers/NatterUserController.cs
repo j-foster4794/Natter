@@ -12,11 +12,13 @@ namespace Natter.Web.Host.Controllers
         {
             _userService = userService;
         }
+
+        [HttpPost]
         public GetUserByIdOutput GetUserById(GetUserByIdInput input)
         {
             var output = new GetUserByIdOutput();
 
-            var response = _userService.GetUserById(new GetUserByIdInput() { UserId = input.UserId });
+            var response = _userService.GetUserById(new GetUserByIdInput() { UserId = 2 });
 
             output.NatterUser = response.NatterUser;
 

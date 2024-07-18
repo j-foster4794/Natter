@@ -14,10 +14,45 @@ export class HomeComponent {
 		username: ""
 	};
 
+	private useTestData = false;
+
 	ngOnInit() {
-		this.createTestPosts();
-		this.createTestUser();
+
+		if (this.useTestData) {
+			this.createTestPosts();
+			this.createTestUser();
+		}
+		else {
+			this.getRealPosts();
+			this.getRealUser();
+		}
 		console.log("The posts: ", this.posts);
+	}
+
+	async getRealPosts() {
+
+		let response = await fetch("https://localhost:44311/NatterPost/GetAllNatterPosts");
+
+		let jsonData = await response.json();
+
+		console.log("Real posts: ", jsonData);
+
+		this.posts = jsonData.result.posts;
+
+	}
+
+	async getRealUser() {
+
+		var response = await fetch("https://localhost:44311/NatterUser/GetUserById", {
+			method: "POST"
+		});
+
+		let jsonData = await response.json();
+
+		console.log("Real user: ", jsonData);
+
+		this.user = jsonData.result.natterUser;
+
 	}
 
 	createTestPosts() {

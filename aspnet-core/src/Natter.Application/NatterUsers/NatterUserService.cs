@@ -45,7 +45,9 @@ namespace Natter.NatterUsers
 		{
 			var output = new GetUserByIdOutput();
 
-			var natterUser = _natterUserRepo.GetAll().Where(u => u.Id==input.UserId).FirstOrDefault();
+			var natterUser = _natterUserRepo.GetAll().Where(u => u.Id == input.UserId).ToList().FirstOrDefault();
+
+			//var natterUser = _natterUserRepo.GetAll();
 
 			output.NatterUser = ObjectMapper.Map<NatterUserDto>(natterUser);
 
