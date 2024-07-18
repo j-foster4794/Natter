@@ -1,0 +1,72 @@
+/* You can add global styles to this file, and also import other style files */
+@mixin MQ($screen: false) {
+    @if $screen !=false {
+        @media only screen and (min-width: $screen) {
+            @content
+        }
+
+        ;
+    }
+}
+
+$iet-dark-button: rgb(0, 0, 0);
+$iet-light-button: rgb(255, 255, 255);
+$iet-std-copy: rgb(51, 51, 51);
+
+$max-desktop-width: 1366px;
+$min-desktop-width: 1025px;
+$min-tablet-width: 768px;
+
+$max-tablet-landscape-width: 1024px;
+
+$side-margin-size: 15px;
+$side-padding-size: 15px;
+
+$min-two-column-width: $min-tablet-width;
+$min-four-column-width: $min-desktop-width;
+
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.row {
+
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 10px;
+    justify-content: center;
+
+}
+
+.column {
+
+    display: block;
+    width: 100%;
+
+    @include MQ($min-two-column-width) {
+
+        width: 45%;
+
+    }
+
+    @include MQ($min-four-column-width) {
+
+        width: 22%;
+
+    }
+
+}
+
+.logo {
+    margin: 0 auto;
+    display: block;
+    max-width: 512px;
+    width: 100%;
+}

@@ -1,0 +1,15 @@
+<ng-container *ngIf="postData !== null">
+
+    <span class="post-date">{{postDate | date: 'medium'}}</span>
+
+    <ng-container *ngFor="let imageUrl of images">
+
+        <img src="{{imageUrl}}">
+
+    </ng-container>
+    <span class="caption">{{caption}}</span>
+    <span class="description">{{description}}</span>
+
+    <app-interactions></app-interactions>
+
+</ng-container>

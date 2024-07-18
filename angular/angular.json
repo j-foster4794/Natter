@@ -177,10 +177,15 @@
   "schematics": {
     "@schematics/angular:component": {
       "prefix": "app",
-      "style": "css"
+      "style": "css",
+      "project": "Natter"
     },
     "@schematics/angular:directive": {
-      "prefix": "app"
+      "prefix": "app",
+      "project": "Natter"
     }
+  },
+  "cli": {
+    "analytics": false
   }
 }

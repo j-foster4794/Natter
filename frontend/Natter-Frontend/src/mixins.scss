@@ -1,0 +1,84 @@
+//media queries
+@mixin MQ($screen: false){
+	@if $screen != false{
+		@media only screen and (min-width: $screen){ @content };
+	}
+}
+
+@mixin SvgIconHelper($url: "", $color: #000000){
+
+	background:svg_color($url, $color);
+	background-repeat:no-repeat;
+
+}
+
+/*
+  This mixin can be used to set the object-fit:
+  @include object-fit(contain);
+  or object-fit and object-position:
+  @include object-fit(cover, top);
+*/
+@mixin object-fit($fit: fill, $position: null){
+	-o-object-fit: $fit;
+	   object-fit: $fit;
+	@if $position {
+		-o-object-position: $position;
+		   object-position: $position;
+		font-family: 'object-fit: #{$fit}; object-position: #{$position}';
+	} @else {
+		font-family: 'object-fit: #{$fit}';
+	}
+}
+
+/*
+	These breakpoint mixins are not needed once other files are converted to mobile first
+*/
+
+
+// Cogworks additions
+@mixin MQMobile() {
+	@include media-breakpoint-down(xs) {
+		@content;
+	}
+}
+
+@mixin MQMobileLandscape() {
+	@media 
+	only screen 
+	and (max-width: $min-tablet-width - 1)
+	and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin MQTablet() {
+	@include media-breakpoint-up(sm) {
+		@content;
+	}
+}
+
+@mixin MQTabletLandscape() {
+	@media 
+	only screen
+	and (min-width: $min-tablet-width) 
+	and (max-width: $max-tablet-landscape-width) 
+	and (orientation: landscape) {
+		@content;
+	}
+}
+
+@mixin MQMobileAndTablet() {
+	@media 
+	only screen
+	and (max-width: $max-tablet-landscape-width) {
+		@content;
+	}
+}
+
+@mixin MQDesktop() {
+	@media 
+	only screen
+	and (min-width: $min-desktop-width) {
+		@content;
+	}
+}

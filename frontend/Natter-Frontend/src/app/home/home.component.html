@@ -1,0 +1,15 @@
+<img class="logo" src="../../assets/Logo.png">
+
+<h1>Home</h1>
+
+<span>Hello <span style="font-weight: bold;">{{user.username}}</span></span>
+
+<h2>Posts</h2>
+<div class="row">
+    <ng-container *ngFor="let post of posts">
+
+        <app-post class="column" [postData]="post"></app-post>
+
+    </ng-container>
+
+</div>
