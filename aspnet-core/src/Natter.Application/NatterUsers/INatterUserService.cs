@@ -6,5 +6,6 @@ namespace Natter.NatterUsers
 	public interface INatterUserService
 	{
 		Task<GetAllNatterUsersOutput> GetAllNatterUsers();
+		GetUserByIdOutput GetUserById(GetUserByIdInput input);
 	}
 }

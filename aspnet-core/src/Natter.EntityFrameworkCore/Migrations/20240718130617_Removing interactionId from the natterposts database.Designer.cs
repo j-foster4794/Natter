@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Natter.EntityFrameworkCore;
 
@@ -11,9 +12,11 @@ using Natter.EntityFrameworkCore;
 namespace Natter.Migrations
 {
     [DbContext(typeof(NatterDbContext))]
-    partial class NatterDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240718130617_Removing interactionId from the natterposts database")]
+    partial class RemovinginteractionIdfromthenatterpostsdatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

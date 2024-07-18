@@ -34,5 +34,22 @@ namespace Natter.NatterUsers
 			return output;
 		}
 
+
+
+		/// <summary>
+		/// 
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		public  GetUserByIdOutput GetUserById(GetUserByIdInput input)
+		{
+			var output = new GetUserByIdOutput();
+
+			var natterUser = _natterUserRepo.GetAll().Where(u => u.Id==input.UserId).FirstOrDefault();
+
+			output.NatterUser = ObjectMapper.Map<NatterUserDto>(natterUser);
+
+			return output;
+		}
 	}
 }

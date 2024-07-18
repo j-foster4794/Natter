@@ -29,5 +29,11 @@ namespace Natter.Tests.NatterUsers
 
 		}
 
+		[Fact]
+		public void ShouldGetNatterUser()
+		{
+			var output = _natterUserService.GetUserById(new Natter.NatterUsers.Dto.GetUserByIdInput() { UserId = 1 });
+			output.NatterUser.Firstname.ShouldBe("James");
+		}
 	}
 }

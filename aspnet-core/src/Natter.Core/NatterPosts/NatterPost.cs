@@ -28,10 +28,5 @@ namespace Natter.Posts
         public NatterUser NatterUser { get; set; }
         public int NatterUserId { get; set; }
 
-        [ForeignKey(nameof(NatterInteractionId))]
-        [DeleteBehavior(DeleteBehavior.Restrict)]
-        public NatterInteraction NatterInteraction {  get; set; }
-
-        public int NatterInteractionId {  get; set; }
     }
 }
