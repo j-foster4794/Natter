@@ -4,6 +4,8 @@
 
 <span>Hello <span style="font-weight: bold;">{{user.username}}</span></span>
 
+<button (click)="openNewPostDialog()">Create new post</button>
+
 <h2>Posts</h2>
 <div class="row">
     <ng-container *ngFor="let post of posts">
@@ -12,4 +14,8 @@
 
     </ng-container>
 
+</div>
+
+<div class="dialog-container" *ngIf="showCreateNewPostDialog">
+    <app-create-post class="dialog" [userId]="user.id"></app-create-post>
 </div>

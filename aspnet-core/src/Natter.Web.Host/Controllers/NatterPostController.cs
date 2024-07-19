@@ -32,5 +32,20 @@ namespace Natter.Web.Host.Controllers
 			return output;
 		}
 
+
+		/// <summary>
+		/// Create a new post
+		/// </summary>
+		/// <param name="input"></param>
+		/// <returns></returns>
+		public async Task<CreateNewPostOutput> CreateNewPost([FromBody]CreateNewPostInput input)
+		{
+
+			var response = await _natterPostService.CreateNewPost(input);
+
+			return response;
+
+		}
+
 	}
 }

@@ -1,0 +1,14 @@
+<h2>Create new post</h2>
+
+<label for="natterCaption">
+    Caption:
+    <input id="natterCaption" [(ngModel)]="caption" type="text">
+</label>
+
+<label for="natterDescription">
+    Description:
+    <input id="natterDescription" [(ngModel)]="description" type="text">
+</label>
+
+<button (click)="createPost()">Create Post</button>
+<button (click)="cancel()">Cancel</button>

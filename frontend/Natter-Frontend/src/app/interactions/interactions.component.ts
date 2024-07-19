@@ -14,7 +14,9 @@ export class InteractionsComponent {
 	}
 
 
+	testInteractionData() {
 
+	}
 
 }
 

@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { IPost } from '../post/post.component';
 import { IUser } from '../iuser';
+import { CreatePostService } from '../create-post/create-post.service';
+import { Subscription } from 'rxjs';
 
 @Component({
 	selector: 'app-home',
@@ -11,10 +13,18 @@ export class HomeComponent {
 
 	public posts = new Array<IPost>();
 	public user: IUser = {
-		username: ""
+		username: "",
+		id: 0
 	};
+	public showCreateNewPostDialog = false;
 
 	private useTestData = false;
+
+	private createPostSubscription = new Subscription();
+
+	constructor(private createPostService: CreatePostService) {
+
+	}
 
 	ngOnInit() {
 
@@ -27,6 +37,13 @@ export class HomeComponent {
 			this.getRealUser();
 		}
 		console.log("The posts: ", this.posts);
+
+		this.createPostSubscription.add(this.createPostService.closeDialogStatus.subscribe((data) => {
+			if (data !== undefined && data !== null) {
+				console.log("Dialog data: ", data);
+				this.showCreateNewPostDialog = data;
+			}
+		}));
 	}
 
 	async getRealPosts() {
@@ -90,8 +107,15 @@ export class HomeComponent {
 	createTestUser() {
 
 		this.user = {
-			username: "TestUser"
+			username: "TestUser",
+			id: 1
 		}
+
+	}
+
+	openNewPostDialog() {
+
+		this.createPostService.openDialog();
 
 	}
 

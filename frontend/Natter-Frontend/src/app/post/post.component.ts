@@ -13,7 +13,7 @@ export class PostComponent {
 	public caption: string = "";
 	public description: string = "";
 	public images: Array<string> = new Array<string>();
-	public postDate: Date = new Date();
+	public postDate: Date | undefined = new Date();
 
 	constructor() {
 
@@ -32,5 +32,5 @@ export interface IPost {
 	caption: string;
 	description: string;
 	images?: string; // Comma separated list or URLs,
-	creationTime: Date
+	creationTime?: Date
 }

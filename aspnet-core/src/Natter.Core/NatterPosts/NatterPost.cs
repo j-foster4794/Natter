@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Natter.NatterInteractions;
 using Microsoft.EntityFrameworkCore;
+using Abp.Timing;
 
 namespace Natter.Posts
 {
@@ -19,14 +20,22 @@ namespace Natter.Posts
         public DateTime CreationTime { get; set; }
 
         public string Caption { get; set; }
-        public string Description { get; set; }
-        public string Images { get; set; }
+		public string Description { get; set; }
+		public string Images { get; set; }
 
 
         [ForeignKey(nameof(NatterUserId))]
 
         public NatterUser NatterUser { get; set; }
         public int NatterUserId { get; set; }
+
+        public NatterPost()
+        {
+            CreationTime = Clock.Now;
+            Caption = string.Empty;
+			Description = string.Empty;
+			Images = string.Empty;
+		}
 
     }
 }
